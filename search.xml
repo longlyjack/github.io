@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[基于ambari安装hadoop集群]]></title>
+    <url>%2F2018%2F03%2F01%2F%E5%9F%BA%E4%BA%8Eambari%E5%AE%89%E8%A3%85hadoop%E9%9B%86%E7%BE%A4%2F</url>
+    <content type="text"><![CDATA[配置平台 主机名 IP地址 master 192.168.2.95 slave1 192.168.2.96 slave2 192.168.2.97 关闭防火墙与安全机制 1234systemctl stop firewalld.servicesystemctl disable firewalld.service setenforce 0sed -i &quot;s/enforcing/disabled/g&quot; /etc/sysconfig/selinux 修改hosts文件1234[root@master ~]# vim /etc/hosts192.168.2.95 master192.168.2.96 slave1192.168.2.97 slave2 拷贝到所有集群12[root@master ~]# scp /etc/hosts slave1:/etc/[root@master ~]# scp /etc/hosts slave2:/etc/ 修改安全设置开启面交互认证 123[root@master ~]# vim /etc/ssh/sshd_configRSAAuthentication yesPubkeyAuthentication yes 修改集群所有 12[root@master ~]# scp /etc/ssh/sshd_config slave1:/etc/ssh/[root@master ~]# scp /etc/ssh/sshd_config slave2:/etc/ssh/ 配置ssh免密钥登陆1# ssh-keygen -t rsa //在所有机器上执行 一路回车 在每台机器上进入密钥文件夹 1[root@master ~]# cd /root/.ssh 在master上执行1[root@master .ssh]# scp id_rsa.pub slave2:/root/.ssh/id_rsa-master.pub 在slave1上执行1scp id_rsa.pub slave2:/root/.ssh/id_rsa-slave1.pub 在slave2上执行12345[root@slave2 .ssh]# cat id_rsa-master.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# cat id_rsa-slave1.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# cat id_rsa.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# scp authorized_keys master:/root/.ssh/authorized_keys[root@slave2 .ssh]# scp authorized_keys slave1:/root/.ssh/authorized_keys 测试免密钥链接1[root@master .ssh]# ssh slave2 时间同步在每台机器上安装ntp服务，让每台机器保持同样时间。 12[root@master ~]# yum -y install ntp[root@master ~]# ntpdate time.nist.gov 安装JDK123456789[root@master depends]# mkdir -p /usr/lib/jdk[root@master depends]# tar xf jdk-8u101-linux-x64.tar.gz -C /usr/lib/jdk/[root@master ~]# vim /etc/profile#JAVA Environmentexport JAVA_HOME=/usr/lib/jdkexport JRE_HOME=/usr/lib/jdk/jreexport PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATHexport CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JRE_HOME/lib[root@master ~]# source /etc/profile 12[root@master ~]# echo $JAVA_HOME[root@master ~]# java -version 安装Mysql安装依赖包123456yum install autoconf numa* libaio libaio-devel -y[root@master ~]# yum -y install MySQL-server MySQL-devel MySQL-client[root@master ~]# vim /etc/my.cnf[root@master ~]# /usr/bin/mysql_install_db //初始化数据库[root@master ~]# chown -R mysql:mysql /var/lib/mysql[root@master ~]# systemctl start mysql 创建数据库12mysql&gt; create database ambari;mysql&gt; grant all privileges on ambari.* to &apos;ambari&apos;@&apos;master&apos; identified by &apos;ambari&apos;; 复制mysql驱动java包 123[root@master depends]# mkdir /usr/share/java[root@master depends]# cp mysql-connector-java-5.1.38-bin.jar /usr/share/java[root@master depends]# cp mysql-connector-java-5.1.38-bin.jar /usr/lib/ambari-server/ 安装ambari12[root@master ~]# yum -y install ambari-serversource /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql //初始化数据库 配置ambari1[root@master ~]# ambari-server setup 启动ambair 访问ambari1http://192.168.2.95:8080/#/login 用户密码：admin/admin 创建集群 等待完成]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[pip下载以及离线安装]]></title>
+    <url>%2F2018%2F03%2F01%2Fpip%E4%B8%8B%E8%BD%BD%E4%BB%A5%E5%8F%8A%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[PIP下载由于有的地方没有外网只能离线安装 1234下载单个Package$ pip install &lt;package&gt; --download /dingyi下载多个Package$ pip install --download /dingyi -r requirements.txt PIP安装 将下载好的Packages拷贝至内网服务器 使用scp、sftp等方式将下载好的Packages拷贝至需要离线安装这些包的内网服务器。 安装Packages假设内网服务器的目录 /tmp/transferred_packages 包含你上一步远程拷贝过来packages，在内网服务器上执行如下命令 安装单个Package的情况1$ pip install --no-index --find-links=&quot;/dingyi&quot; &lt;package&gt; 安装多个Packages1$ pip install --no-index --find-links=&quot;/dingyi&quot; -r requirements.txt]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>pip</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[fcn内网穿透科学上网搭建]]></title>
     <url>%2F2018%2F03%2F01%2Ffcn%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式]]></content>
@@ -11,6 +34,18 @@
       <tags>
         <tag>科学上网</tag>
         <tag>vpn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[fcn内网穿透一键接入私有网络搭建]]></title>
+    <url>%2F2018%2F03%2F01%2Ffcn%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E4%B8%80%E9%94%AE%E6%8E%A5%E5%85%A5%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式]]></content>
+      <categories>
+        <category>运维分享</category>
+        <category>内网穿透</category>
+      </categories>
+      <tags>
+        <tag>内网穿透</tag>
       </tags>
   </entry>
   <entry>
