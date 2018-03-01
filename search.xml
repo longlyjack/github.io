@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[redis私有云平台cachecloud搭建]]></title>
+    <url>%2F2018%2F03%2F01%2Fredis%E7%A7%81%E6%9C%89%E4%BA%91%E5%B9%B3%E5%8F%B0cachecloud%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[环境准备安装JDK1[root@]# tar xf jdk-8u101-linux-x64.tar.gz 添加环境变量 12345#JAVA Environmentexport JAVA_HOME=/usr/lib/jdkexport JRE_HOME=/usr/lib/jdk/jreexport PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATHexport CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JRE_HOME/lib 安装Mysql]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[maven换成阿里云源，整个世界美好了]]></title>
     <url>%2F2018%2F03%2F01%2Fmaven%E6%8D%A2%E6%88%90%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90%EF%BC%8C%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%E7%BE%8E%E5%A5%BD%E4%BA%86%2F</url>
     <content type="text"><![CDATA[在maven安装目录下有个conf文件夹settings.xml 把镜像源换成阿里云的。下载就快了 12345678910[root@dingyi conf]# pwd/usr/local/maven/conf[root@dingyi conf]# vim settings.xml搜索&lt;mirror&gt; 146-159 之间替换&lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;aliyun maven&lt;/name&gt; &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;/mirror&gt; 体验非一般的感觉吧！是不是一下世界就美好了呢！]]></content>
