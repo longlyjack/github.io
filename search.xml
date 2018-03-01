@@ -24,19 +24,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[fcn内网穿透科学上网搭建]]></title>
-    <url>%2F2018%2F03%2F01%2Ffcn%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式]]></content>
-      <categories>
-        <category>运维分享</category>
-        <category>科学上网</category>
-      </categories>
-      <tags>
-        <tag>科学上网</tag>
-        <tag>vpn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[fcn内网穿透一键接入私有网络搭建]]></title>
     <url>%2F2018%2F03%2F01%2Ffcn%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E4%B8%80%E9%94%AE%E6%8E%A5%E5%85%A5%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式]]></content>
