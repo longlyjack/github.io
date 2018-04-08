@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[postgres安装后显示-bash-4.2$]]></title>
+    <url>%2F2018%2F04%2F08%2Fpostgres%E5%AE%89%E8%A3%85%E5%90%8E%E6%98%BE%E7%A4%BA-bash-4-2%2F</url>
+    <content type="text"><![CDATA[出现 shell 显示-bash-4.2$不显示用户名路径的问题 这是因为 PostgreSQL 安装时创建的 postgres 用户的配置文件缺少以下内容： 1export PS1=&apos;[\u@\h \w]&apos; 1234vim .bash_profile在末尾添加export PS1=&apos;[\u@\h \w]&apos; source .bash_profile]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[routeros]]></title>
+    <url>%2F2018%2F03%2F21%2Frouteros%2F</url>
+    <content type="text"><![CDATA[用户管理查看用户名1[admin@MikroTik] &gt; /user print 修改用户名密码 进入user 目录下 修改 admin密码为123456 1[admin@MikroTik] /user&gt; set admin password=123456 账号分组权限full最高权限、write普通管理，没有ftp、policy权限、policy权限及无法修改任何账号密码包括当前账号，Read 权限除了不能上传文件和修改密码外， 不能写入任何的配置， 即只能登陆设备查看。 创建用户 备份与恢复123[admin@MikroTik] &gt; system backup save name=dingyi Saving system configurationConfiguration backup saved 查看备份1[admin@MikroTik] &gt; file print 备份恢复1234[admin@MikroTik] &gt; system backup load name=dingyi.backup password: ******Restore and reboot? [y/N]: y 导出一个脚本 导出一个包含ip的脚本 12345678[admin@MikroTik] &gt; ip address export file=address[admin@MikroTik] &gt; file print # NAME TYPE SIZE CREATION-TIME 0 longlyjck.backup backup 8.6KiB mar/21/2018 16:45:26 1 address.rsc script 145 mar/21/2018 16:47:07 2 primary-slave disk jan/11/2015 05:27:23 3 skins directory jan/27/2015 13:24:04 4 dingyi.backup 123456[admin@MikroTik] &gt; export compact # mar/21/2018 16:50:48 by RouterOS 6.32.3# software id = ZJ3M-ESHW#/ip addressadd address=10.0.0.1/24 interface=ether2 network=10.0.0.0 将生成的配置文件导入系统 1[admin@MikroTik] &gt; import address.rsc 系统复位1234[admin@MikroTik] &gt; /system reset-configuration Dangerous! Reset anyway? [y/N]: ysystem configuration will be reset 复位时可带 keep-users 指令， 描述如下:Keep-users – 复位不删除管理用户账号no-defaults - 不加载任何默认配置， 清空所有skip-backup - 当 yes 被指定， 自动备份将不会再复位前创建run-after-reset - 在 run after reset 指定后 export 档后， 复位会导入指定的 RouterOS 脚本配置文件。 日志管理查看，默认的进行日志类型 action 都是 memory，即存储在内容， 当路由器重启后会自动清除。 1234567[admin@MikroTik] &gt; system logging print Flags: X - disabled, I - invalid, * - default # TOPICS ACTION PREFIX 0 * info memory 1 * error memory 2 * warning memory 3 * critical echo 为保证日志内被存储下来， 并汇出用于分析， 可设置日志存在到本地磁盘中， 我们将 info 日志类型设置action=disk， 即存储在本地磁盘， 配置如下 123[admin@MikroTik] &gt; system logging set 0 action=disk[admin@MikroTik] &gt; system logging set 1 action=disk [admin@MikroTik] &gt; system logging set 2 action=disk]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>routeros</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[自动化运维工具ansible安装]]></title>
+    <url>%2F2018%2F03%2F06%2F%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7ansible%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装ansible安装epel.repo源12# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo# yum -y install ansible 安装所有被管理端需要安装1yum -y install libselinux-python ansible基础配置12345[root@jumpserver ansible]# tree /etc/ansible//etc/ansible/ ├── ansible.cfg #ansible配置文件├── hosts #被ansible管理的主机名单└── roles 编辑hosts文件添加主机组dingyi 123[root@ ansible]# vim hosts[dingyi]10.1.3.93 如果设置了秘钥链接 1234567[root@ ansible]# vim hosts[dingyi]192.168.2.91 ansible_ssh_user=root ansible_ssh_pass=123456192.168.2.93 ansible_ssh_user=root ansible_ssh_pass=123456命令说明ansible_ssh_user：ssh连接的用户名ansible_ssh_pass：ssh连接的密码 利用ansible远程执行命令查看192.168.2.93机器 w的命令 123456[root@ ansible]# ansible 192.168.2.93 -m command -a &quot;w&quot; 192.168.2.93 | SUCCESS | rc=0 &gt;&gt; 14:07:29 up 1 day, 58 min, 2 users, load average: 0.01, 0.02, 0.05USER TTY FROM LOGIN@ IDLE JCPU PCPU WHATroot pts/0 192.168.2.224 13:45 2:17 0.08s 0.08s -bashroot pts/1 192.168.2.91 14:07 0.00s 0.21s 0.03s w 查看整个dingyi主机组的对应信息]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+        <tag>自动化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ambari-agent节点丢失以及无法注册]]></title>
+    <url>%2F2018%2F03%2F05%2Fambari-agent%E8%8A%82%E7%82%B9%E4%B8%A2%E5%A4%B1%E4%BB%A5%E5%8F%8A%E6%97%A0%E6%B3%95%E6%B3%A8%E5%86%8C%2F</url>
+    <content type="text"><![CDATA[ambari-agent节点丢失经过从官方查询是因为python2.7.5.48造成的 。升级或者降级都可以解决。也可以关闭python验证。 centos7.4 安装ambari注册时候会在页面上无法注册也是这个问题 [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:579) 解决办法1sed -i &apos;s/^verify.*/verify=disable/&apos; /etc/python/cert-verification.cfg 重启ambari-agent就可以了]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>常见问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[大数据平台hdfsgateway挂载到windows实行双向传输]]></title>
+    <url>%2F2018%2F03%2F05%2F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0hdfsgateway%E6%8C%82%E8%BD%BD%E5%88%B0windows%E5%AE%9E%E8%A1%8C%E5%8F%8C%E5%90%91%E4%BC%A0%E8%BE%93%2F</url>
+    <content type="text"><![CDATA[环境准备 安装windows nfs客户端在控制面板-程序功能-打开或关闭windows功能 选择nfs服务 挂载nfsgateway先检测是否能检测到nfs 1showmount -e 10.1.3.68 挂载nfs 1mount -o nolock \\10.1.3.68\! G: 到这里发现只能读取 不能写入。。是不是很很有强迫症 。所以。接下来搞定他 Windows7 NFS客户端访问NFS无法写入文件问提 运行regedit 进入注册表 1HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default，给其中增加两项：AnonymousUid，AnonymousGid 大功告成，重启计算机，重新mount]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>hdfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[大数据平台组件之数据分发nifi安装]]></title>
+    <url>%2F2018%2F03%2F05%2F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%84%E4%BB%B6%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%88%86%E5%8F%91nifi%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[下载安装包1http://nifi.apache.org/download.html 上传并解压安装包 修改配置文件 12[root@slave1 conf]# pwd/soft/nifi-1.4.0/conf 单节点安装123456[root@slave1 conf]# vim nifi.properties128 # web properties #129 nifi.web.war.directory=./lib130 nifi.web.http.host=10.1.3.69131 nifi.web.http.port=9090填写ip 与端口 启动单节点123[root@slave1 bin]# pwd/soft/nifi-1.4.0/bin[root@slave1 bin]# ./nifi.sh start 集群安装12345需要修改的选项nifi.cluster.is.node=truenifi.cluster.node.address=host3nifi.cluster.node.protocol.port=1444nifi.zookeeper.connect.string=host3:2181,host4:2181,host5:2181 nifi.web.http.host：节点主机名。 nifi.cluster.node.address：节点主机名。 nifi.web.http.port：页面的端口，各节点都设置为一样的9445。 nifi.cluster.node.protocol.port：子节点相互访问的端口，各节点都配置为一样1444(大于1024以上即可，不可和节点其他端口重复)。 将nifi安装包分发到其他需要安装的节点上 1scp -r nifi root@slave2:/soft/ 启动集群nifi1[root@slave1 nifi-1.4.0]# ./bin/nifi.sh start]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[企业开源跳板机jumpserver安装与使用]]></title>
+    <url>%2F2018%2F03%2F05%2F%E4%BC%81%E4%B8%9A%E5%BC%80%E6%BA%90%E8%B7%B3%E6%9D%BF%E6%9C%BAjumpserver%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[环境准备操作系统12[root@jumpserver ~]# cat /etc/redhat-release CentOS Linux release 7.4.1708 (Core) 内核版本12[root@jumpserver ~]# uname -r3.10.0-693.el7.x86_64 主机网络参数设置 主机名 ip 用途 jumpserver 192.168.2.91 跳板机 client 192.168.2.93 客户端 部署jumpserver下载jumpserver源码安装包 1https://github.com/jumpserver/jumpserver/tree/master 开源地址 简历公网源yum仓库 1wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 将源码包拷贝到jumpserver服务器上并解压缩 123[root@jumpserver soft]# unzip jumpserver-master.zip -d /usr/local/#特别注意jumpserver绝对不能解压到root目录下，会出现权限问题。 运行jumpserver安装脚本1234[root@jumpserver install]# pwd/usr/local/jumpserver-master/install[root@jumpserver install]# python install.py安装过程略过，脚本会自动安装所需要的依赖包以及pip包，请耐心等待 交互设置 这里可以直接回车 选择安装数据库也可以指定数据库ip 安装完成 浏览器访问Web登录请访问http://ip:8000 基本使用 注册用户以后会出现下图所示：登陆密码及密钥密码，请务必作记录 修改web登录密码 下载账户 xshell 远程登录 xshell 远程登录工具导入秘钥 客户机shell导入秘钥：工具-用户秘钥管理者 建立通过秘钥访问的远程链接l 账户资产添加主机 添加sudo 流程：授权管理-sudo-添加别名 添加系统用户 流程：授权管理-系统用户 添加 注意：必须先在管理服务器主机上创建系统用户 添加授权规则]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>跳板机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[基于ambari安装hadoop集群]]></title>
     <url>%2F2018%2F03%2F01%2F%E5%9F%BA%E4%BA%8Eambari%E5%AE%89%E8%A3%85hadoop%E9%9B%86%E7%BE%A4%2F</url>
     <content type="text"><![CDATA[配置平台 主机名 IP地址 master 192.168.2.95 slave1 192.168.2.96 slave2 192.168.2.97 关闭防火墙与安全机制 1234systemctl stop firewalld.servicesystemctl disable firewalld.service setenforce 0sed -i &quot;s/enforcing/disabled/g&quot; /etc/sysconfig/selinux 修改hosts文件1234[root@master ~]# vim /etc/hosts192.168.2.95 master192.168.2.96 slave1192.168.2.97 slave2 拷贝到所有集群12[root@master ~]# scp /etc/hosts slave1:/etc/[root@master ~]# scp /etc/hosts slave2:/etc/ 修改安全设置开启面交互认证 123[root@master ~]# vim /etc/ssh/sshd_configRSAAuthentication yesPubkeyAuthentication yes 修改集群所有 12[root@master ~]# scp /etc/ssh/sshd_config slave1:/etc/ssh/[root@master ~]# scp /etc/ssh/sshd_config slave2:/etc/ssh/ 配置ssh免密钥登陆1# ssh-keygen -t rsa //在所有机器上执行 一路回车 在每台机器上进入密钥文件夹 1[root@master ~]# cd /root/.ssh 在master上执行1[root@master .ssh]# scp id_rsa.pub slave2:/root/.ssh/id_rsa-master.pub 在slave1上执行1scp id_rsa.pub slave2:/root/.ssh/id_rsa-slave1.pub 在slave2上执行12345[root@slave2 .ssh]# cat id_rsa-master.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# cat id_rsa-slave1.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# cat id_rsa.pub &gt;&gt;authorized_keys[root@slave2 .ssh]# scp authorized_keys master:/root/.ssh/authorized_keys[root@slave2 .ssh]# scp authorized_keys slave1:/root/.ssh/authorized_keys 测试免密钥链接1[root@master .ssh]# ssh slave2 时间同步在每台机器上安装ntp服务，让每台机器保持同样时间。 12[root@master ~]# yum -y install ntp[root@master ~]# ntpdate time.nist.gov 安装JDK123456789[root@master depends]# mkdir -p /usr/lib/jdk[root@master depends]# tar xf jdk-8u101-linux-x64.tar.gz -C /usr/lib/jdk/[root@master ~]# vim /etc/profile#JAVA Environmentexport JAVA_HOME=/usr/lib/jdkexport JRE_HOME=/usr/lib/jdk/jreexport PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATHexport CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JRE_HOME/lib[root@master ~]# source /etc/profile 12[root@master ~]# echo $JAVA_HOME[root@master ~]# java -version 安装Mysql安装依赖包123456yum install autoconf numa* libaio libaio-devel -y[root@master ~]# yum -y install MySQL-server MySQL-devel MySQL-client[root@master ~]# vim /etc/my.cnf[root@master ~]# /usr/bin/mysql_install_db //初始化数据库[root@master ~]# chown -R mysql:mysql /var/lib/mysql[root@master ~]# systemctl start mysql 创建数据库12mysql&gt; create database ambari;mysql&gt; grant all privileges on ambari.* to &apos;ambari&apos;@&apos;master&apos; identified by &apos;ambari&apos;; 复制mysql驱动java包 123[root@master depends]# mkdir /usr/share/java[root@master depends]# cp mysql-connector-java-5.1.38-bin.jar /usr/share/java[root@master depends]# cp mysql-connector-java-5.1.38-bin.jar /usr/lib/ambari-server/ 安装ambari12[root@master ~]# yum -y install ambari-serversource /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql //初始化数据库 配置ambari1[root@master ~]# ambari-server setup 启动ambair 访问ambari1http://192.168.2.95:8080/#/login 用户密码：admin/admin 创建集群 等待完成]]></content>
@@ -26,7 +107,7 @@
   <entry>
     <title><![CDATA[fcn内网穿透一键接入私有网络搭建]]></title>
     <url>%2F2018%2F03%2F01%2Ffcn%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E4%B8%80%E9%94%AE%E6%8E%A5%E5%85%A5%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式]]></content>
+    <content type="text"><![CDATA[支持平台 操作系统 文件名 Windows操作系统 windows/fcn_win.exe Linux操作系统 windows/fcn_win.exe Linux操作系统 linux-embedded/lede或openwrt/fcn_mips/mipsel/arm/armhf Linux arm linux-embedded/`fcn-arm/armbian Android Fcn.apk FCN github 地址：https://github.com/boywhp/fcn VIP需要VIP可以联系我也可以联系作者 windows 搭建 点启动就行 客户端链接 这时候可以访问你服务器的网络。你懂的 linux 搭建我用的是centos系统 把fcn_x64上传到服务器修改配置文件 vim fcn.conf 链接方式 K2P 华硕固件 把fcn.conf 上传到路由器上，配置文件如下 把fcn_mipsel 也放在路由器上 然后启动 用客户端链接]]></content>
       <categories>
         <category>运维分享</category>
         <category>内网穿透</category>
