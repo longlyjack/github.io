@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[用脚本连接postgres方法]]></title>
+    <url>%2F2018%2F07%2F05%2F%E7%94%A8%E8%84%9A%E6%9C%AC%E8%BF%9E%E6%8E%A5postgres%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[​ 由于要每天备份数据库为了不妨碍主库所以我需要指定连接数据库 。这样就在脚本连接的时候我需要数据密码。 PGPASSWORD 环境变量12export PGPASSWORD=&quot;123456&quot;pg_dump -U test testdb &gt; /backup/testdb.bak 案例 12345678910111213141516171819202122#!/bin/bash 8 export PGPASSWORD=&quot;123456&quot; 9 IP=172.16.17.63 10 name=`date +&quot;%Y%m%d&quot;` 11 bakhome=/opt/dbbak 13 find $bakhome -name &quot;*.tar.gz&quot; -mtime +7 &gt;$bakhome/temp.log 14 if [ -s $bakhome/temp.log ];then 15 echo &apos;超出备份周期，删除超出部分文件&apos; 16 cd $bakhome 17 cat $bakhome/temp.log | while read line 18 do 19 rm -rf $line 20 done 21 echo &quot;开始备份数据库&quot; 22 pg_dump -h $IP -U postgres elink -f $bakhome/elink.dump 23 if [ $? -eq 0 ];then 24 cd $bakhome &amp;&amp; tar -zcvf elink-$name.tar.gz elink.dump 25 if [ $? -eq 0 ];then 26 rm -rf $bakhome/elink.dump 27 fi 28 fi 29 fi]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>postgres</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[postgres数据库创建表空间]]></title>
+    <url>%2F2018%2F07%2F05%2Fpostgres%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%2F</url>
+    <content type="text"><![CDATA[创建表空间示例：12postgres=# create tablespace dingyi owner postgres location &apos;/usr/local/pgdata&apos;;CREATE TABLESPACE 表空间使用1create database db01 tablespace dingyi; -- 在创建数据库时指定表空间 查询表空间占用物理储存空间以及位置1234postgres=# SELECT oid from pg_database where datname=&apos;elink_20180515&apos;; oid -------- 152106 查看存储位置12root@debian:/# find / -name 152106/dbdata/data/PG_9.5_201510051/152106 删除表空间1drop tablespace if exists dingyi; //如果报错请删除表空间内的的表在删除表空间]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>postgres</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[debian下vim没有颜色]]></title>
+    <url>%2F2018%2F07%2F05%2Fdebian%E4%B8%8Bvim%E6%B2%A1%E6%9C%89%E9%A2%9C%E8%89%B2%2F</url>
+    <content type="text"><![CDATA[vim /etc/vim/vimrc #查找到syntax on 启用，去掉前面的“ (引号)。]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>常见问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[shell脚本编程之条件语句]]></title>
     <url>%2F2018%2F05%2F02%2Fshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[常用条件测试分类123-d：测试是否为目录-e：测试目录或者文件是否存在-f: 测试是否为文件 逻辑测试123-a或&amp;&amp;:逻辑与而且的意思-o或||：逻辑或或者的意思！：逻辑否 整数测试： 12]]></content>
       <categories>
         <category>运维分享</category>
       </categories>
@@ -24,10 +59,11 @@
     <url>%2F2018%2F04%2F08%2Fpostgres%E5%AE%89%E8%A3%85%E5%90%8E%E6%98%BE%E7%A4%BA-bash-4-2%2F</url>
     <content type="text"><![CDATA[出现 shell 显示-bash-4.2$不显示用户名路径的问题 这是因为 PostgreSQL 安装时创建的 postgres 用户的配置文件缺少以下内容： 1export PS1=&apos;[\u@\h \w]&apos; 1234vim .bash_profile在末尾添加export PS1=&apos;[\u@\h \w]&apos; source .bash_profile]]></content>
       <categories>
-        <category>运维分享</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>运维</tag>
+        <tag>数据库</tag>
+        <tag>postgresql</tag>
       </tags>
   </entry>
   <entry>
