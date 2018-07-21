@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[/dev/null-Permission-denied']]></title>
+    <url>%2F2018%2F07%2F21%2Fdev-null-Permission-denied%2F</url>
+    <content type="text"><![CDATA[今天突然遇到centos登陆普通用户出现 1234567[root@node1 data]# su - postgresLast login: Sat Jul 21 11:49:21 CST 2018 on pts/0-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied 出现这个是权限问题，切换成root 设置权限就好了 1chmod 777 /dev/null 设置完毕后退出root用户。重连即可]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[用脚本连接postgres方法]]></title>
     <url>%2F2018%2F07%2F05%2F%E7%94%A8%E8%84%9A%E6%9C%AC%E8%BF%9E%E6%8E%A5postgres%E6%96%B9%E6%B3%95%2F</url>
     <content type="text"><![CDATA[​ 由于要每天备份数据库为了不妨碍主库所以我需要指定连接数据库 。这样就在脚本连接的时候我需要数据密码。 PGPASSWORD 环境变量12export PGPASSWORD=&quot;123456&quot;pg_dump -U test testdb &gt; /backup/testdb.bak 案例 12345678910111213141516171819202122#!/bin/bash 8 export PGPASSWORD=&quot;123456&quot; 9 IP=172.16.17.63 10 name=`date +&quot;%Y%m%d&quot;` 11 bakhome=/opt/dbbak 13 find $bakhome -name &quot;*.tar.gz&quot; -mtime +7 &gt;$bakhome/temp.log 14 if [ -s $bakhome/temp.log ];then 15 echo &apos;超出备份周期，删除超出部分文件&apos; 16 cd $bakhome 17 cat $bakhome/temp.log | while read line 18 do 19 rm -rf $line 20 done 21 echo &quot;开始备份数据库&quot; 22 pg_dump -h $IP -U postgres elink -f $bakhome/elink.dump 23 if [ $? -eq 0 ];then 24 cd $bakhome &amp;&amp; tar -zcvf elink-$name.tar.gz elink.dump 25 if [ $? -eq 0 ];then 26 rm -rf $bakhome/elink.dump 27 fi 28 fi 29 fi]]></content>
