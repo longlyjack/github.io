@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA['postgres数据库常用命令']]></title>
+    <url>%2F2018%2F07%2F21%2Fpostgres%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[/dev/null-Permission-denied']]></title>
     <url>%2F2018%2F07%2F21%2Fdev-null-Permission-denied%2F</url>
     <content type="text"><![CDATA[今天突然遇到centos登陆普通用户出现 1234567[root@node1 data]# su - postgresLast login: Sat Jul 21 11:49:21 CST 2018 on pts/0-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied-bash: /dev/null: Permission denied 出现这个是权限问题，切换成root 设置权限就好了 1chmod 777 /dev/null 设置完毕后退出root用户。重连即可]]></content>
