@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[centos6-yum安装最新nginx]]></title>
+    <url>%2F2018%2F07%2F22%2Fcentos6-yum%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0nginx%2F</url>
+    <content type="text"><![CDATA[今天安装nginx发现163源并不是最新的官网稳定源 123456vim /etc/yum.repos.d/nginx.repo[nginx]name=nginx repobaseurl=http://nginx.org/packages/centos/$releasever/$basearch/gpgcheck=0enabled=1 已经跟官方稳定版一样了。]]></content>
+      <categories>
+        <category>运维分享</category>
+      </categories>
+      <tags>
+        <tag>常见问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA['postgres数据库常用命令']]></title>
     <url>%2F2018%2F07%2F21%2Fpostgres%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"></content>
