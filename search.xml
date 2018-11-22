@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[跟我学python之极客战记第二章森林]]></title>
     <url>%2F2018%2F11%2F21%2F%E8%B7%9F%E6%88%91%E5%AD%A6python%E4%B9%8B%E6%9E%81%E5%AE%A2%E6%88%98%E8%AE%B0%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%A3%AE%E6%9E%97%2F</url>
-    <content type="text"><![CDATA[碎天裂地提示：使用你的buildXY之锤在大门附近创建两个”fire-trap”。 当你退到安全距离以外他们就会引爆. 1234hero.buildXY(&quot;fire-trap&quot;, 35, 29) #需要在大门下放两个炸弹 后面是坐标 hero.buildXY(&quot;fire-trap&quot;, 35, 35)hero.moveXY(20, 33) #记得换鞋子（先返回在出大门）hero.moveXY(48, 32) 平原森林保卫战提示：在标记上建造两个围栏保护村民 12hero.buildXY(&quot;fence&quot;, 40, 51) 直接获取两个坐标地址然后建造围栏hero.buildXY(&quot;fence&quot;, 39, 20) 一步走错提示：纠正他们的路径，别让他们走到地雷上 1234hero.moveXY(11, 36)hero.moveXY(35, 25)hero.moveXY(40, 57)hero.moveXY(76, 57) #通过hreo.moveXY的命令直接按照宝石的路径走完就可以了 羊肠小道提示：到小路的尽头去，并在那儿修一个栅栏 123456# 这是小路的第一点。hero.moveXY(36, 59)# 这是小路的第一点，向小路的下一个点移动。hero.moveXY(37, 12)# 筑起一道栅栏来阻止食人魔。hero.buildXY(&quot;fence&quot;, 72, 25) 主线森林小屋提示：这些森林小屋中可能有食人魔！ 123456789101112131415161718192021222324hero.moveXY(19, 33) #移动到第一个xenemy = hero.findNearestEnemy() #检查是否有食人魔# if语句会检查某变量是否有食人魔。if enemy: hero.attack(enemy) hero.attack(enemy)hero.moveXY(49, 51)enemy = hero.findNearestEnemy()if enemy: # 攻击这里的敌人： hero.attack(enemy) hero.attack(enemy) # pass不做任何事情，它只负责结束if语句 passhero.moveXY(58, 14)enemy = hero.findNearestEnemy()# 使用if语句检查敌人是否存在：if enemy: hero.attack(enemy) hero.attack(enemy) # 如果敌人存在，就攻击它：]]></content>
+    <content type="text"><![CDATA[碎天裂地提示：使用你的buildXY之锤在大门附近创建两个”fire-trap”。 当你退到安全距离以外他们就会引爆. 1234hero.buildXY(&quot;fire-trap&quot;, 35, 29) #需要在大门下放两个炸弹 后面是坐标 hero.buildXY(&quot;fire-trap&quot;, 35, 35)hero.moveXY(20, 33) #记得换鞋子（先返回在出大门）hero.moveXY(48, 32) 平原森林保卫战提示：在标记上建造两个围栏保护村民 12hero.buildXY(&quot;fence&quot;, 40, 51) 直接获取两个坐标地址然后建造围栏hero.buildXY(&quot;fence&quot;, 39, 20) 一步走错提示：纠正他们的路径，别让他们走到地雷上 1234hero.moveXY(11, 36)hero.moveXY(35, 25)hero.moveXY(40, 57)hero.moveXY(76, 57) #通过hreo.moveXY的命令直接按照宝石的路径走完就可以了 羊肠小道提示：到小路的尽头去，并在那儿修一个栅栏 123456# 这是小路的第一点。hero.moveXY(36, 59)# 这是小路的第一点，向小路的下一个点移动。hero.moveXY(37, 12)# 筑起一道栅栏来阻止食人魔。hero.buildXY(&quot;fence&quot;, 72, 25) 主线森林小屋提示：这些森林小屋中可能有食人魔！ 123456789101112131415161718192021222324hero.moveXY(19, 33) #移动到第一个xenemy = hero.findNearestEnemy() #检查是否有食人魔# if语句会检查某变量是否有食人魔。if enemy: hero.attack(enemy) hero.attack(enemy)hero.moveXY(49, 51)enemy = hero.findNearestEnemy()if enemy: # 攻击这里的敌人： hero.attack(enemy) hero.attack(enemy) # pass不做任何事情，它只负责结束if语句 passhero.moveXY(58, 14)enemy = hero.findNearestEnemy()# 使用if语句检查敌人是否存在：if enemy: hero.attack(enemy) hero.attack(enemy) # 如果敌人存在，就攻击它： 主线IF的盛宴提示：在食人魔营地击败他们 1234567while True: 我们可以用一个while循环 一直执行 检查 攻击语句 enemy = hero.findNearestEnemy() # 使用一个 “if” 语句去检查是否有敌人存在: if enemy: hero.attack(enemy) hero.attack(enemy) # 攻击敌人，如果存在的话： 主线背靠背提示：在中间防守 1234567891011while True: #while循环 enemy = hero.findNearestEnemy() if enemy: #if判断这个怪是否存在存在攻击如果不存在返回中间x # 亦或主动出击... hero.attack(enemy) hero.attack(enemy) pass else: # 亦或回到你的阵地防守。 hero.moveXY(40, 35) pass 主线森林劈砍者提示：尽可能使用继承cleave 1234567891011hero.moveXY(23, 23) #尽量像怪物靠拢while True: #while循环检查食人魔在用if判断技能是否好了。 enemy = hero.findNearestEnemy() if hero.isReady(&quot;cleave&quot;): # 用“Cleave”干掉敌人！ hero.cleave(enemy) pass else: # 否则（如果“cleave”还没准备好），就用你的普通攻击 hero.attack(enemy) pass]]></content>
       <categories>
         <category>python</category>
       </categories>
@@ -180,8 +180,8 @@
         <category>大数据</category>
       </categories>
       <tags>
-        <tag>常见问题</tag>
         <tag>大数据</tag>
+        <tag>常见问题</tag>
       </tags>
   </entry>
   <entry>
