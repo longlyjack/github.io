@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[跟我学python之极客战记第二章森林]]></title>
     <url>%2F2018%2F11%2F21%2F%E8%B7%9F%E6%88%91%E5%AD%A6python%E4%B9%8B%E6%9E%81%E5%AE%A2%E6%88%98%E8%AE%B0%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%A3%AE%E6%9E%97%2F</url>
-    <content type="text"><![CDATA[碎天裂地提示 使用你的buildXY之锤在大门附近创建两个”fire-trap”。 当你退到安全距离以外他们就会引爆. 1234hero.buildXY(&quot;fire-trap&quot;, 35, 29) #需要在大门下放两个炸弹 后面是坐标 hero.buildXY(&quot;fire-trap&quot;, 35, 35)hero.moveXY(20, 33) #记得换鞋子（先返回在出大门）hero.moveXY(48, 32) 平原森林保卫战提示 在标记上建造两个围栏保护村民 12hero.buildXY(&quot;fence&quot;, 40, 51) 直接获取两个坐标地址然后建造围栏hero.buildXY(&quot;fence&quot;, 39, 20)]]></content>
+    <content type="text"><![CDATA[碎天裂地提示：使用你的buildXY之锤在大门附近创建两个”fire-trap”。 当你退到安全距离以外他们就会引爆. 1234hero.buildXY(&quot;fire-trap&quot;, 35, 29) #需要在大门下放两个炸弹 后面是坐标 hero.buildXY(&quot;fire-trap&quot;, 35, 35)hero.moveXY(20, 33) #记得换鞋子（先返回在出大门）hero.moveXY(48, 32) 平原森林保卫战提示：在标记上建造两个围栏保护村民 12hero.buildXY(&quot;fence&quot;, 40, 51) 直接获取两个坐标地址然后建造围栏hero.buildXY(&quot;fence&quot;, 39, 20) 一步走错提示：纠正他们的路径，别让他们走到地雷上 1234hero.moveXY(11, 36)hero.moveXY(35, 25)hero.moveXY(40, 57)hero.moveXY(76, 57) #通过hreo.moveXY的命令直接按照宝石的路径走完就可以了 羊肠小道提示：到小路的尽头去，并在那儿修一个栅栏 123456# 这是小路的第一点。hero.moveXY(36, 59)# 这是小路的第一点，向小路的下一个点移动。hero.moveXY(37, 12)# 筑起一道栅栏来阻止食人魔。hero.buildXY(&quot;fence&quot;, 72, 25)]]></content>
       <categories>
         <category>python</category>
       </categories>
