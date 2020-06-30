@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://https://longlyjack.github.io/testblog.github.io</id>
+    <title>运维笔记</title>
+    <updated>2020-06-30T02:05:17.672Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://https://longlyjack.github.io/testblog.github.io"/>
+    <link rel="self" href="https://https://longlyjack.github.io/testblog.github.io/atom.xml"/>
+    <subtitle>一个专注运维的网站，运维笔记是互联网经验分享，以及IT运维工作经验的个人博客，博主由系统运维、监控、系统安全、云计算虚拟化、数据库、运维工具等分类组成。</subtitle>
+    <logo>https://https://longlyjack.github.io/testblog.github.io/images/avatar.png</logo>
+    <icon>https://https://longlyjack.github.io/testblog.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, 运维笔记</rights>
+    <entry>
+        <title type="html"><![CDATA[测试发布]]></title>
+        <id>https://https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/</id>
+        <link href="https://https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/">
+        </link>
+        <updated>2020-06-23T09:25:17.000Z</updated>
+        <content type="html"><![CDATA[<p>123123<br>
+1<br>
+2<br>
+31<br>
+2<br>
+3<br>
+1</p>
+]]></content>
+    </entry>
+</feed>
