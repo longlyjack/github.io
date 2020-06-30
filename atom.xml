@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://https://longlyjack.github.io/testblog.github.io</id>
+    <id>https://longlyjack.github.io/testblog.github.io</id>
     <title>运维笔记</title>
-    <updated>2020-06-30T02:11:38.098Z</updated>
+    <updated>2020-06-30T02:11:48.823Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://https://longlyjack.github.io/testblog.github.io"/>
-    <link rel="self" href="https://https://longlyjack.github.io/testblog.github.io/atom.xml"/>
-    <logo>https://https://longlyjack.github.io/testblog.github.io/images/avatar.png</logo>
-    <icon>https://https://longlyjack.github.io/testblog.github.io/favicon.ico</icon>
+    <link rel="alternate" href="https://longlyjack.github.io/testblog.github.io"/>
+    <link rel="self" href="https://longlyjack.github.io/testblog.github.io/atom.xml"/>
+    <logo>https://longlyjack.github.io/testblog.github.io/images/avatar.png</logo>
+    <icon>https://longlyjack.github.io/testblog.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 运维笔记</rights>
     <entry>
         <title type="html"><![CDATA[测试发布]]></title>
-        <id>https://https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/</id>
-        <link href="https://https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/">
+        <id>https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/</id>
+        <link href="https://longlyjack.github.io/testblog.github.io/post/ce-shi-fa-bu/">
         </link>
         <updated>2020-06-23T09:25:17.000Z</updated>
         <content type="html"><![CDATA[<p>123123<br>
